@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Menu from "./Menu.jsx";
+
 import Settings from "./tabs/Settings.jsx";
 import Characters from "./tabs/Characters.jsx";
 import Questions from "./tabs/Questions.jsx";
@@ -41,8 +43,11 @@ function Edit(props) {
   }
 
   return(
-    <div className="overflow-auto">
-      {content}
+    <div className="w-full h-full flex flex-col sm:flex-row bg-gray-800">
+      <Menu page={page} setPage={setPage}></Menu>
+      <div className="overflow-auto w-full h-full bg-purple-500">
+        {content}
+      </div>
     </div>
   )
 
