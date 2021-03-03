@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import CharCard from "./characters/CharCard.jsx";
+import CharEdit from "./characters/CharEdit.jsx";
 
 import Error from '../extra/Error.jsx';
 
@@ -27,6 +28,7 @@ function Characters(props) {
     }
 
     let chars = props.chars
+    // Find the index of a character based on their ID
     let isID = (el) => el.id === newChar.id
     let charIndex = chars.findIndex(isID)
     console.log(charIndex)
@@ -47,6 +49,7 @@ function Characters(props) {
     props.setChars(chars)
   }
 
+
   function delChar(id) {
     let result = []
     props.chars.forEach(char => {
@@ -60,9 +63,13 @@ function Characters(props) {
     props.setChars(result);
   }
 
+
+  let charEdit
+
   const list = [];
   if (props.chars.length > 0) {
-    props.chars.forEach(char => {
+    for(let i=0; i < props.chars.length; i++) {
+      let char = props.chars[i]
 
       let editing = false;
       if (editingChar === char.id) {
@@ -74,14 +81,21 @@ function Characters(props) {
         editing: editing,
         setEditingChar: setEditingChar,
         setChar: setChar,
-        delChar: delChar,
-        key: char.id
+        delChar: delChar
       }
 
       list.push(
-        <CharCard {...passed} />
+        <CharCard {...passed} key={char.id} />
       )
-    })
+
+      if (editingChar === char.id)
+        charEdit = <CharEdit {...passed}></CharEdit>
+      if (typeof charEdit !== 'undefined' && (i+1)%3 === 0) {
+        list.push(charEdit)
+        charEdit = undefined
+      }
+        
+    }
   } else {
     list.push( 
       <Error message="🤦 I forget to add anything to allow you to create characters. Whoopsy doodle." />
@@ -89,7 +103,7 @@ function Characters(props) {
   }
 
   return(
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-hidden p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 overflow-hidden p-4">
       {list}
     </div>
   )
