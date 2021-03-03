@@ -6,7 +6,12 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      minWidth: {
+      '32': '8rem',
+      }
+    },
+    
   },
   variants: {
     extend: {},
