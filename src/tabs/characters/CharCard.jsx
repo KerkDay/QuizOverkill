@@ -35,7 +35,7 @@ function CharCard(props) {
 
 function CardBox(props) {
 
-  let editing = props.editing ? "border-4 border-light-blue-500" : ""
+  let editing = props.editing ? "ring-4 ring-blue-500" : ""
   return (
     <div className={"flex flex-col sm:flex-row justify-evenly align-stretch bg-white shadow-lg rounded-lg space-y-2 sm:space-y-0 sm:space-x-2 w-full "+editing} {...props}>
       {props.children}
