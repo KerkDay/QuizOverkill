@@ -1,146 +1,36 @@
-import React, { useReducer, useState } from "react";
-
-import reducer from "image-blob-reduce";
+import React from "react";
 
 import Icons from "../../extra/Icons.jsx";
-import Tooltip from "../../extra/Tooltip.jsx";
 
 function CharCard(props) {
-  const [tempChar, setTempChar] = useState(props.char)
-
   // Decide whether or not to show an image or a default icon
-  let img = <img src={tempChar.img} className="object-contain w-full h-full" />
-  if (typeof tempChar.img === "undefined" || tempChar.img === "")
+  let img = <img src={props.char.img} className="object-contain w-full h-full" />
+  if (typeof props.char.img === "undefined" || props.char.img === "")
     img = <Icons.Upload className="object-contain w-full h-full p-8" />
 
-  // Update a characters property, send it up the foodchain
-  function editChar(entry, val) {
-    props.setChar({
-      id: props.char.id,
-      [entry]: val
-    })
-    setTempChar({
-      ...tempChar,
-      ...{[entry]: val}
-    })
-  }
+  return (
+    <CardBox onClick={()=>{props.setEditingChar(props.char.id)}}>
 
-  // Upload a new char.img
-  function uploadImg(event) {
-    if (event.target.files[0] && event.target.files[0].type.match("image.*")) {
-      const reader = new FileReader();
-      const reduce = new reducer;
+      {/* Image */}
+      <div className="h-32 sm:h-auto sm:w-32 sm:min-w-32 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
+        {img}
+      </div>
 
-      reduce.toBlob(event.target.files[0], {max: 300})
-      .then(blob => {
-          reader.readAsDataURL(blob)
-          reader.onload = (evt) => {
-          editChar("img", evt.target.result)
-          console.log(evt.target.result)
-        }
-      })
-    } else {
-      event.target.value = null;
-    }
-  }
+      {/* Description */}
+      <div className="px-2 w-full sm:px-0 sm:py-2 b">
+        <div className="font-bold text-lg">{props.char.name}</div>
+        <div className="break-words min-w-full w-0">{props.char.desc}</div>
+      </div>
 
+      {/* Tools */}
+      {/* <div className="justify-self-end p-2">
+        <span onClick={() => { props.setEditingChar(props.char.id) }}>
+          <Icons.Edit className="h-8 w-8" />
+        </span>
+      </div> */}
 
-
-  if (props.editing) {
-    // Edit Character
-    return (
-      <CardBox>
-  
-        {/* Image */}
-        <div className="h-32 sm:h-auto sm:w-48 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg relative">
-          {img}
-          <div className="absolute z-10 inset-0 flex items-end justify-end space-x-1 p-2">
-            {/* Upload New Picture */}
-            <Tooltip message="Upload a new image" >
-              <label>
-                <Icons.Upload className="h-8 w-8 bg-black bg-opacity-50 text-white" />
-                <input type="file" className="hidden" accept="png, jpg, jpeg, gif" onChange={uploadImg} />
-              </label>
-            </Tooltip>
-
-            {/* Delete Picture */}
-            <div onClick={ () => { editChar("img", "") } }>
-              <Tooltip message="Remove image">
-                <Icons.Trash className="h-8 w-8 bg-black bg-opacity-50 text-white" />
-              </Tooltip>
-            </div>
-          </div>
-        </div>
-  
-        {/* Description */}
-        <div className="w-full px-2 flex-1 sm:px-0 sm:py-2">
-            <label className="font-bold text-xs">Name: 
-              <input name="char-name" 
-                className="rounded-sm border border-gray-500 px-2 w-full text-base"
-                maxLength="20" 
-                value={tempChar.name} 
-                onChange={event => {
-                  editChar("name", event.target.value)
-                }} 
-              />
-            </label>
-          <label className="font-bold text-xs">Description: 
-            <textarea name="char-desc" 
-              className="rounded-sm border border-gray-500 p-2 h-30 w-full text-base"
-              value={tempChar.desc} 
-              onChange={event => {
-                editChar("desc", event.target.value)
-              }} 
-            />
-            </label>
-        </div>
-  
-        {/* Tools */}
-        <div className="justify-self-end flex flex-row sm:flex-col space-y-2 align-middle p-2">
-          {/* Stop Editing */}
-          <div onClick={() => { props.setEditingChar(null); }}>
-            <Tooltip message="Stop Editing">
-              <Icons.Cancel className="h-8 w-8" />
-            </Tooltip>
-          </div>
-
-          <div onClick={ () => { props.delChar(props.char.id) } }>
-            <Tooltip message="Remove Character" >
-              <Icons.Trash className="h-8 w-8" />
-            </Tooltip>
-          </div>
-
-          
-        </div>
-  
-      </CardBox>
-    )
-  } else {
-    // Show Character Details
-    return (
-      <CardBox onClick={()=>{props.setEditingChar(props.char.id)}}>
-  
-        {/* Image */}
-        <div className="h-32 sm:h-auto sm:w-48 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
-          {img}
-        </div>
-  
-        {/* Description */}
-        <div className="w-full px-2 flex-1 sm:px-0 sm:py-2">
-          <div className="font-bold text-lg">{props.char.name}</div>
-          <div>{props.char.desc}</div>
-        </div>
-  
-        {/* Tools */}
-        {/* <div className="justify-self-end p-2">
-          <span onClick={() => { props.setEditingChar(props.char.id) }}>
-            <Icons.Edit className="h-8 w-8" />
-          </span>
-        </div> */}
-
-      </CardBox>
-    )
-  }
+    </CardBox>
+  )
 }
 
 function CardBox(props) {
