@@ -6,7 +6,7 @@ function Modal(props) {
   } else {
     return (
       <div className="bg-black bg-opacity-50 absolute inset-0 flex align-middle justify-center" onClick={() => { props.closeModal() }}>
-        <div>
+        <div className="bg-white p-4 rounded-lg">
           {props.children}
         </div>
       </div>
