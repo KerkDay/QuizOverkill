@@ -64,8 +64,8 @@ function Characters(props) {
   }
 
 
-  let charEdit
-
+  let charEdit = undefined
+  let addEdit = false
   const list = [];
   if (props.chars.length > 0) {
     for(let i=0; i < props.chars.length; i++) {
@@ -88,11 +88,13 @@ function Characters(props) {
         <CharCard {...passed} key={char.id} />
       )
 
-      if (editingChar === char.id)
-        charEdit = <CharEdit {...passed}></CharEdit>
-      if (typeof charEdit !== 'undefined' && (i+1)%3 === 0) {
+      if (editingChar === char.id) {
+        charEdit = <CharEdit {...passed} key={char.id+".edit"}></CharEdit>
+        addEdit = true
+      }
+      if (addEdit && (i+1)%3 === 0) {
         list.push(charEdit)
-        charEdit = undefined
+        addEdit = false
       }
         
     }

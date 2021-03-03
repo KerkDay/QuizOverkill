@@ -9,7 +9,7 @@ function CharCard(props) {
     img = <Icons.Upload className="object-contain w-full h-full p-8" />
 
   return (
-    <CardBox onClick={()=>{props.setEditingChar(props.char.id)}}>
+    <CardBox onClick={()=>{props.setEditingChar(props.char.id)}} {...props}>
 
       {/* Image */}
       <div className="h-32 sm:h-auto sm:w-32 sm:min-w-32 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
@@ -34,8 +34,10 @@ function CharCard(props) {
 }
 
 function CardBox(props) {
+
+  let editing = props.editing ? "border-4 border-light-blue-500" : ""
   return (
-    <div className="flex flex-col sm:flex-row justify-evenly align-stretch bg-white shadow-lg rounded-lg space-y-2 sm:space-y-0 sm:space-x-2 w-full" {...props}>
+    <div className={"flex flex-col sm:flex-row justify-evenly align-stretch bg-white shadow-lg rounded-lg space-y-2 sm:space-y-0 sm:space-x-2 w-full "+editing} {...props}>
       {props.children}
     </div>
   )
