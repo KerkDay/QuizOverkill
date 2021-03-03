@@ -92,7 +92,11 @@ function Characters(props) {
         charEdit = <CharEdit {...passed} key={char.id+".edit"}></CharEdit>
         addEdit = true
       }
-      if (addEdit && (i+1)%3 === 0) {
+
+      let columns = 1;
+      if (window.innerWidth > 768) columns = 2
+      if (window.innerWidth > 1536) columns = 3
+      if (addEdit && (i+1)%columns === 0) {
         list.push(charEdit)
         addEdit = false
       }
