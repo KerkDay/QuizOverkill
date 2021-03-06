@@ -12,7 +12,7 @@ function CharCard(props) {
     <CardBox onClick={()=>{props.setEditingChar(props.char.id)}} {...props}>
 
       {/* Image */}
-      <div className="h-32 sm:h-auto sm:w-32 sm:min-w-32 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
+      <div className="h-24 sm:h-auto sm:w-24 sm:min-w-24 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
         {img}
       </div>
 
