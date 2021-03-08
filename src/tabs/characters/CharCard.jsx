@@ -4,15 +4,15 @@ import Icons from "../../extra/Icons.jsx";
 
 function CharCard(props) {
   // Decide whether or not to show an image or a default icon
-  let img = <img src={props.char.img} className="object-contain w-full h-full" />
+  let img = <img src={props.char.img} className="object-contain w-24 h-24 block" />
   if (typeof props.char.img === "undefined" || props.char.img === "")
-    img = <Icons.Upload className="object-contain w-full h-full p-8" />
+    img = <Icons.Upload className="object-contain block w-24 h-24 p-8" />
 
   return (
     <CardBox onClick={()=>{props.setEditingChar(props.char.id)}} {...props}>
 
       {/* Image */}
-      <div className="h-24 sm:h-auto sm:w-24 sm:min-w-24 p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
+      <div className="p-2 bg-gray-800 rounded-t-lg sm:rounded-none sm:rounded-l-lg">
         {img}
       </div>
 
@@ -33,15 +33,36 @@ function CharCard(props) {
   )
 }
 
+
+function NewCharCard(props) {
+
+  return (
+    <div className={`flex justify-center align-middle bg-gray-800 hover:bg-gray-900 shadow-lg rounded-lg w-full cursor-pointer col-span-full select-none`} onClick={()=>{ props.setChar({}) }} {...props}>
+
+
+      {/* Description */}
+      <div className="h-20 flex items-center">
+        <div className="font-bold text-2xl text-white">+ New Character</div>
+      </div>
+
+    </div>
+  )
+}
+
+
+
 function CardBox(props) {
 
   let editing = props.editing ? "ring-4 ring-blue-500" : ""
   return (
-    <div className={"flex flex-col sm:flex-row justify-evenly align-stretch bg-white shadow-lg rounded-lg space-y-2 sm:space-y-0 sm:space-x-2 w-full "+editing} {...props}>
+    <div className={`${editing} flex flex-col sm:flex-row justify-evenly align-stretch bg-white shadow-lg rounded-lg space-y-2 sm:space-y-0 sm:space-x-2 w-full cursor-pointer`} {...props}>
       {props.children}
     </div>
   )
 }
 
 
-export default CharCard;
+export {
+  CharCard,
+  NewCharCard
+}
