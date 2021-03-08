@@ -9,9 +9,9 @@ function CharEdit(props) {
   const [tempChar, setTempChar] = useState(props.char)
 
   // Decide whether or not to show an image or a default icon
-  let img = <img src={tempChar.img} className="object-contain w-full h-full" />
+  let img = <img src={tempChar.img} className="object-contain w-32 h-32" />
   if (typeof tempChar.img === "undefined" || tempChar.img === "")
-    img = <Icons.Upload className="object-contain w-full h-full p-8" />
+    img = <Icons.Upload className="object-contain w-32 h-32 p-8" />
 
   // Update a characters property, send it up the foodchain
   function editChar(entry, val) {
