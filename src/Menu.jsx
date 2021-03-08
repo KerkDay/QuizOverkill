@@ -26,7 +26,7 @@ function Menu (props) {
       </div>
 
       {/* The menu itself */}
-      <div className={menuOpen + " sm:block sm:max-h-screen h-screen transition-all absolute sm:static bg-gray-800 top-full left-0 right-0 z-50"}>
+      <div className={`${menuOpen} sm:block sm:max-h-screen h-screen transition-all absolute sm:static bg-gray-800 top-full left-0 right-0 z-50 sm:z-0`}>
         <MenuTab {...props} name="settings" onClick={()=> { changePage("settings") }}>
           ⚙ Settings
         </MenuTab>
@@ -39,6 +39,10 @@ function Menu (props) {
         <MenuTab {...props} name="testing" onClick={()=> { changePage("testing") }}>
           ✔ Testing
         </MenuTab>
+
+        <MenuItem {...props}>
+          <a href="https://kerkday.com" target="_blank" className="no-underline">Created by Kerk Day</a>
+        </MenuItem>
       </div>
 
     </div>
@@ -66,9 +70,9 @@ function MenuTab (props) {
 
 // The links in the menu
 function MenuItem (props) {
-  let classes = ""
+  let classes = " text-white text-base text-right"
   classes += props.name === props.page
-  ? ""
+  ? " font-bold"
   : ""
 
   return (
