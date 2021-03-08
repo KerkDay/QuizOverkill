@@ -8,7 +8,13 @@ module.exports = {
   theme: {
     extend: {
       minWidth: {
-      '32': '8rem',
+        '32': '8rem',
+      },
+      maxHeight: {
+        '32': '8rem',
+      },
+      maxWidth: {
+        '32': '8rem',
       }
     },
     
