@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import CharCard from "./characters/CharCard.jsx";
+import {CharCard, NewCharCard} from "./characters/CharCard.jsx";
 import CharEdit from "./characters/CharEdit.jsx";
 
 import Error from '../extra/Error.jsx';
@@ -19,12 +19,14 @@ function Characters(props) {
         const idSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return idSet.charAt(Math.floor(Math.random() * idSet.length))
       }
-      let result = randChar()+randChar()
+      let result = randChar()+randChar()+randChar()
+      newChar.id = result
       props.chars.forEach(char => {
         if (result === char.id) {
           newChar.id = null
         }
       })
+      setEditingChar(result)
     }
 
     let chars = props.chars
@@ -64,10 +66,13 @@ function Characters(props) {
   }
 
 
-  let charEdit = undefined
-  let addEdit = false
+  
   const list = [];
   if (props.chars.length > 0) {
+    
+    let charEdit = undefined
+    let addEdit = false
+
     for(let i=0; i < props.chars.length; i++) {
       let char = props.chars[i]
 
@@ -89,24 +94,25 @@ function Characters(props) {
       )
 
       if (editingChar === char.id) {
-        charEdit = <CharEdit {...passed} key={char.id+".edit"}></CharEdit>
+        charEdit = <CharEdit {...passed} key={`${char.id}.edit`}></CharEdit>
         addEdit = true
       }
 
       let columns = 1;
       if (window.innerWidth > 768) columns = 2
       if (window.innerWidth > 1536) columns = 3
-      if (addEdit && (i+1)%columns === 0) {
+      if (addEdit && ((i+1)%columns === 0 || props.chars.length === i+1)) {
         list.push(charEdit)
         addEdit = false
       }
         
     }
-  } else {
-    list.push( 
-      <Error message="🤦 I forget to add anything to allow you to create characters. Whoopsy doodle." />
-    )
   }
+
+  list.push(
+    <NewCharCard setChar={setChar} key="NewChar"></NewCharCard>
+  )
+  
 
   return(
     <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 overflow-hidden p-4">
