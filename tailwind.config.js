@@ -2,12 +2,15 @@ module.exports = {
   purge: [
     "*.css",
     "*.html",
-    "*.scss"
+    "*.scss",
+    "./dist/**/*.js",
+    "./src/**/*.jsx"
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       minWidth: {
+        '24': '6rem',
         '32': '8rem',
       },
       maxHeight: {

@@ -4,9 +4,9 @@ import Icons from "../../extra/Icons.jsx";
 
 function CharCard(props) {
   // Decide whether or not to show an image or a default icon
-  let img = <img src={props.char.img} className="object-contain w-24 h-24 block" />
+  let img = <img src={props.char.img} className="object-contain min-w-24 w-24 h-24 block" />
   if (typeof props.char.img === "undefined" || props.char.img === "")
-    img = <Icons.Upload className="object-contain block w-24 h-24 p-8" />
+    img = <Icons.Upload className="object-contain block min-w-24 w-24 h-24 p-8" />
 
   return (
     <CardBox onClick={()=>{props.setEditingChar(props.char.id)}} {...props}>
