@@ -26,9 +26,9 @@ function Menu (props) {
       </div>
 
       {/* The menu itself */}
-      <div className={`${menuOpen} sm:block sm:max-h-screen h-screen transition-all absolute sm:static bg-gray-800 top-full left-0 right-0 z-50 sm:z-0`}>
-        <MenuTab {...props} name="settings" onClick={()=> { changePage("settings") }}>
-          ⚙ Settings
+      <div className={`${menuOpen} sm:block sm:max-h-screen h-screen transition-all absolute sm:static bg-gray-800 top-full left-0 right-0 z-50 sm:z-0 flex flex-col`}>
+        <MenuTab {...props} name="options" onClick={()=> { changePage("options") }}>
+          ⚙ Options
         </MenuTab>
         <MenuTab {...props} name="characters" onClick={()=> { changePage("characters") }}>
           👥 Characters
@@ -39,10 +39,11 @@ function Menu (props) {
         <MenuTab {...props} name="testing" onClick={()=> { changePage("testing") }}>
           ✔ Testing
         </MenuTab>
-
-        <MenuItem {...props}>
-          <a href="https://kerkday.com" target="_blank" className="no-underline">Created by Kerk Day</a>
-        </MenuItem>
+        <div className={`p-2 justify-self-end`}>
+          <MenuItem {...props}>
+            <a href="https://kerkday.com" target="_blank" className="no-underline">Created by Kerk Day</a>
+          </MenuItem>
+        </div>
       </div>
 
     </div>

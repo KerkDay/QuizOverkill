@@ -11,7 +11,7 @@ import Error from './extra/Error.jsx';
 function App() {
   const [characters, setCharacters] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const [settings, setSettings] = useState({});
+  const [options, setOptions] = useState({});
 
   // Which base app to use
   // start, edit
@@ -21,10 +21,10 @@ function App() {
   
   switch (base) {
     case "start":
-      mainElement = <Start setCharacters={setCharacters} setQuestions={setQuestions} setSettings={setSettings} setBase={setBase}/>
+      mainElement = <Start setCharacters={setCharacters} setQuestions={setQuestions} setOptions={setOptions} setBase={setBase}/>
       break;
     case "edit":
-      mainElement = <Edit characters={characters} questions={characters} settings={settings} setCharacters={setCharacters} setQuestions={setQuestions} setSettings={setSettings} setBase={setBase}/>
+      mainElement = <Edit characters={characters} questions={questions} options={options} setCharacters={setCharacters} setQuestions={setQuestions} setOptions={setOptions} setBase={setBase}/>
       break;
   }
   return (

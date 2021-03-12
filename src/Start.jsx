@@ -22,12 +22,12 @@ function Start (props) {
         // Check if valid quiz file
         if (typeof result.characters !== 'undefined'
         && typeof result.questions !== 'undefined'
-        && typeof result.settings !== 'undefined'
+        && typeof result.options !== 'undefined'
         ) {
           setError(null);
           props.setCharacters( result.characters );
           props.setQuestions( result.questions );
-          props.setSettings( result.settings );
+          props.setOptions( result.options );
           props.setBase( "edit" );
         } else {
           setError("This is not a valid quiz file.");

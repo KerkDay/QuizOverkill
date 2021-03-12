@@ -2,26 +2,33 @@ import React, { useState } from "react";
 
 import Menu from "./Menu.jsx";
 
-import Settings from "./tabs/Settings.jsx";
+import Options from "./tabs/Options.jsx";
 import Characters from "./tabs/Characters.jsx";
 import Questions from "./tabs/Questions.jsx";
 import Testing from "./tabs/Testing.jsx";
 
 function Edit(props) {
   // Set and change the current page
-  const [page, setPage] = useState("settings");
+  const [page, setPage] = useState("options");
   let content = (
     <div>🤦‍♂️ There was a problem. Sorry about that!</div>
   )
 
+  let passed;
+
   switch(page) {
-    case "settings":
+    case "options":
+      passed = {
+        options: props.options,
+        setOptions: props.setOptions,
+        setPage: setPage
+      }
       content = (
-        <Settings setPage={setPage}/>
+        <Options {...passed} />
       )
       break;
     case "characters":
-      let passed = {
+      passed = {
         chars: props.characters,
         setChars: props.setCharacters,
         setPage: setPage
@@ -45,7 +52,7 @@ function Edit(props) {
   return(
     <div className="w-full h-full flex flex-col sm:flex-row bg-gray-800">
       <Menu page={page} setPage={setPage}></Menu>
-      <div className="overflow-auto w-full h-full bg-purple-500">
+      <div className="overflow-y-auto overflow-x-visible w-full h-full bg-purple-500 p-4">
         {content}
       </div>
     </div>
