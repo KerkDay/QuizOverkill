@@ -115,7 +115,7 @@ function Characters(props) {
   
 
   return(
-    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 overflow-hidden">
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 overflow-hidden p-2 sm:p-4">
       {list}
     </div>
   )
