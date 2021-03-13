@@ -6,7 +6,7 @@ This project is currently under construction. If you've found this, I'm sorry.
 ## What's this made with?
 Glad you asked, hypothetical person!
 Quiz Overkill is made using React, predominantly. This is a project that helped me learn exactly how ReactJS works.
-It's also made using SnowPack, because [https://fireship.io/](Fireship) won't shut up about it! It's actually really nice.
+It's also made using SnowPack, because [https://fireship.io/](Fireship.io) has been advocating hard for it to replace Webpack.
 
 You can find more details about the other stuff included in the package.json file
 
