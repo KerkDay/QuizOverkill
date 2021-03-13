@@ -52,7 +52,7 @@ function Edit(props) {
   return(
     <div className="w-full h-full flex flex-col sm:flex-row bg-gray-800">
       <Menu page={page} setPage={setPage}></Menu>
-      <div className="overflow-y-auto overflow-x-visible w-full h-full bg-purple-500 p-2 sm:p-4">
+      <div className="overflow-y-auto overflow-x-visible w-full h-full bg-purple-500">
         {content}
       </div>
     </div>
